@@ -14,10 +14,11 @@ app.use(express.static(__dirname));
 ========================= */
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "reva",
-    database: "puzzle_world"
+    host: process.env.MYSQLHOST,
+    port: process.env.MYSQLPORT,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE
 });
 
 /* =========================
