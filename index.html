@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BAMS Puzzle World</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🌿 BAMS PUZZLE WORLD</h1>
+
+    <p>
+        Ayurveda • Knowledge • Learning • Challenge
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         STARTING PAGE
+    ========================= -->
+
+    <section class="home" id="home">
+
+        <div class="logo">
+            🧠🌿
+        </div>
+
+
+        <h2>
+            CHECK YOUR KNOWLEDGE
+        </h2>
+
+
+        <h3>
+            PRABHAVA PUZZLE CHALLENGE
+        </h3>
+
+
+        <p class="description">
+
+            Test your BAMS and Ayurveda knowledge through
+            an exciting puzzle challenge.
+
+            Find the missing letters and complete the
+            Ayurvedic concepts before the timer ends.
+
+        </p>
+
+
+        <!-- =========================
+             PHOTOS
+        ========================= -->
+
+        <div class="people">
+
+
+            <div class="person-card">
+
+                <img
+                    src="photo.jpg"
+                    alt="Dr. Ashwini"
+                >
+
+                <div class="role">
+                    Guided by
+                </div>
+
+                <h3>
+                    👩‍⚕️ Dr. Ashwini
+                </h3>
+
+            </div>
+
+
+            <div class="person-card">
+
+                <img
+                    src="tharun.jpg"
+                    alt="Tharun Kumar S K"
+                >
+
+                <div class="role">
+                    Presented by
+                </div>
+
+                <h3>
+                    👨‍⚕️ Tharun Kumar S K
+                </h3>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             INFORMATION
+        ========================= -->
+
+        <div class="info">
+
+            <span>
+                🧩 20 Puzzles
+            </span>
+
+            <span>
+                ⏱️ 30 Seconds
+            </span>
+
+            <span>
+                ⭐ 5 Marks Each
+            </span>
+
+            <span>
+                🏆 100 Marks
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             START BUTTON
+        ========================= -->
+
+        <button
+            class="start-btn"
+            onclick="showForm()"
+        >
+
+            🚀 START CHALLENGE
+
+        </button>
+
+
+        <!-- =========================
+             NAME + USN FORM
+        ========================= -->
+
+        <div
+            class="user-form"
+            id="userForm"
+        >
+
+            <h3>
+                👤 Enter Your Details
+            </h3>
+
+
+            <input
+                type="text"
+                id="playerName"
+                placeholder="Enter Your Name"
+                autocomplete="off"
+            >
+
+
+            <input
+                type="text"
+                id="playerUSN"
+                placeholder="Enter Your USN Number"
+                autocomplete="off"
+            >
+
+
+            <button
+                class="begin-btn"
+                onclick="beginGame()"
+            >
+
+                🧩 BEGIN PUZZLE
+
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         GAME PAGE
+    ========================= -->
+
+    <section
+        class="game"
+        id="game"
+    >
+
+
+        <div class="top">
+
+
+            <span
+                class="puzzle-count"
+                id="puzzleCount"
+            >
+
+                Puzzle 1 / 20
+
+            </span>
+
+
+            <span class="score">
+
+                ⭐ Score:
+
+                <span id="score">
+                    0
+                </span>
+
+            </span>
+
+
+            <span class="timer">
+
+                ⏱️
+
+                <span id="timer">
+                    00:30
+                </span>
+
+            </span>
+
+
+        </div>
+
+
+        <!-- TIMER BAR -->
+
+        <div class="timer-bar-box">
+
+            <div
+                class="timer-bar"
+                id="timerBar"
+            ></div>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-box">
+
+            <div
+                class="progress"
+                id="progress"
+            ></div>
+
+        </div>
+
+
+        <h2 class="game-title">
+
+            🔍 FIND THE MISSING LETTERS
+
+        </h2>
+
+
+        <!-- =========================
+             QUESTION
+        ========================= -->
+
+        <div class="question-box">
+
+
+            <div class="question-label">
+
+                💡 QUESTION
+
+            </div>
+
+
+            <div
+                class="question"
+                id="question"
+            ></div>
+
+
+        </div>
+
+
+        <div class="answer-heading">
+
+            ✏️ Complete the Answer
+
+        </div>
+
+
+        <div
+            class="answer-area"
+            id="answerArea"
+        ></div>
+
+
+        <!-- =========================
+             BUTTONS
+        ========================= -->
+
+        <div class="buttons">
+
+
+            <button
+                class="check"
+                id="checkBtn"
+                onclick="checkAnswer()"
+            >
+
+                ✓ CHECK ANSWER
+
+            </button>
+
+
+            <button
+                class="next"
+                id="nextBtn"
+                onclick="nextPuzzle()"
+            >
+
+                NEXT PUZZLE →
+
+            </button>
+
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div
+            class="result"
+            id="result"
+        ></div>
+
+
+        <!-- =========================
+             TIME UP
+        ========================= -->
+
+        <div
+            class="time-up"
+            id="timeUp"
+        >
+
+
+            <h3>
+                ⏰ TIME'S UP!
+            </h3>
+
+
+            <p>
+                Correct Answer:
+            </p>
+
+
+            <div
+                class="correct-answer"
+                id="correctAnswer"
+            ></div>
+
+
+            <p class="no-marks">
+
+                No marks awarded because the time expired.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         FINAL PAGE
+    ========================= -->
+
+    <section
+        class="end"
+        id="end"
+    >
+
+
+        <div class="end-icon">
+            🏆
+        </div>
+
+
+        <h2>
+            🎉 Challenge Completed!
+        </h2>
+
+
+        <!-- PLAYER INFORMATION -->
+
+        <div
+            class="player-info"
+            id="playerInfo"
+        ></div>
+
+
+        <!-- FINAL SCORE -->
+
+        <div class="final-score">
+
+            ⭐ Final Score:
+
+            <strong id="finalScore">
+                0
+            </strong>
+
+            / 100
+
+        </div>
+
+
+        <!-- CONGRATULATIONS -->
+
+        <p class="completed-text">
+
+            🎊 Congratulations!
+
+            You have successfully completed
+            the PRABHAVA PUZZLE CHALLENGE.
+
+        </p>
+
+
+        <p class="completed-text">
+
+            Your participation certificate is
+            available in the leaderboard.
+
+        </p>
+
+
+        <!-- =========================
+             LEADERBOARD BUTTON
+        ========================= -->
+
+        <button
+            class="restart"
+            onclick="window.location.href='leaderboard.html'"
+        >
+
+            🏆 VIEW LEADERBOARD & CERTIFICATE
+
+        </button>
+
+
+    </section>
+
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    🌿 BAMS Puzzle World
+
+    <br>
+
+    Learning Ayurveda Through Interactive Puzzles
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
+const puzzles = [
+
+    {
+        question:
+            "I am not Rasa, Guna, Vīrya or Vipāka, but I produce a specific action. What am I?",
+
+        answer:
+            "PRABHAVA",
+
+        missing:
+            [1, 3, 5, 6]
+    },
+
+
+    {
+        question:
+            "My Rasa, Guna, Vīrya and Vipāka suggest one action, but my actual action is different and special. What am I?",
+
+        answer:
+            "VICHITRA PRATYARABDHA",
+
+        missing:
+            [1, 3, 5, 7, 9, 11, 13, 15, 17]
+    },
+
+
+    {
+        question:
+            "My action agrees with what my Rasa, Guna, Vīrya and Vipāka indicate. What am I?",
+
+        answer:
+            "SAMANA PRATYARABDHA",
+
+        missing:
+            [1, 3, 5, 7, 9, 11, 13, 15]
+    },
+
+
+    {
+        question:
+            "Which drug is famous for its special actions of Bhedana despite having a Madhura Rasa?",
+
+        answer:
+            "TRIVRIT",
+
+        missing:
+            [1, 2, 4]
+    },
+
+
+    {
+        question:
+            "Which substance is Madhura in taste but has a special Vamana action?",
+
+        answer:
+            "MADANA PHALA",
+
+        missing:
+            [1, 3, 5, 7, 9]
+    },
+
+
+    {
+        question:
+            "Which drug possesses a special action of Lekhana?",
+
+        answer:
+            "KSHARA",
+
+        missing:
+            [1, 3, 5]
+    },
+
+
+    {
+        question:
+            "Which drug is known for its special action in MutraKrichra?",
+
+        answer:
+            "GOKSHURA",
+
+        missing:
+            [1, 3, 5, 7]
+    },
+
+
+    {
+        question:
+            "Rasa + Guna + Vīrya + Vipāka + ? = Complete understanding",
+
+        answer:
+            "PRABHAVA",
+
+        missing:
+            [1, 3, 5, 6]
+    },
+
+
+    {
+        question:
+            "I am known for my special support to the heart?",
+
+        answer:
+            "HRIDYA",
+
+        missing:
+            [1, 3]
+    },
+
+
+    {
+        question:
+            "I awaken the mind and help clear accumulated kapha?",
+
+        answer:
+            "MEDHYA",
+
+        missing:
+            [1, 3, 4]
+    },
+
+
+    {
+        question:
+            "When the bowel becomes excessively loose, I help bring it under control?",
+
+        answer:
+            "ATISARAGHNA",
+
+        missing:
+            [1, 3, 5, 7, 9]
+    },
+
+
+    {
+        question:
+            "I support the urin pathway and make urination easier?",
+
+        answer:
+            "MUTRALA",
+
+        missing:
+            [1, 3, 5]
+    },
+
+
+    {
+        question:
+            "I gently guide Apana and support proper bowel movement?",
+
+        answer:
+            "ANULOMANA",
+
+        missing:
+            [1, 3, 5, 7]
+    },
+
+
+    {
+        question:
+            "I clear the pathway downward and empty the bowels?",
+
+        answer:
+            "VIRECHANA",
+
+        missing:
+            [1, 3, 5, 7]
+    },
+
+
+    {
+        question:
+            "I am traditionally associated with purification and relief in skin disorders?",
+
+        answer:
+            "KUSTHAGHNA",
+
+        missing:
+            [1, 3, 5, 7, 9]
+    },
+
+
+    {
+        question:
+            "I am traditionally associated with healthy hair?",
+
+        answer:
+            "KESHYA",
+
+        missing:
+            [1, 3, 5]
+    },
+
+
+    {
+        question:
+            "I nourish Rasayana and have a special affinity for maintaining vitality?",
+
+        answer:
+            "RASAYANA",
+
+        missing:
+            [1, 3, 5, 7]
+    },
+
+
+    {
+        question:
+            "Though gentle in taste, I make the body expel upward?",
+
+        answer:
+            "VAMANA",
+
+        missing:
+            [1, 3, 5]
+    },
+
+
+    {
+        question:
+            "I soothe irritation and support a healthy voice?",
+
+        answer:
+            "KANTHYA",
+
+        missing:
+            [1, 3, 5]
+    },
+
+
+    {
+        question:
+            "I nourish and support the reproductive system?",
+
+        answer:
+            "VRISHYA",
+
+        missing:
+            [1, 3, 5]
+    }
+
+];
+
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let currentPuzzle = 0;
+
+let score = 0;
+
+let time = 30;
+
+let timer = null;
+
+let finished = false;
+
+let playerName = "";
+
+let playerUSN = "";
+
+
+
+/* =====================================================
+   SHOW FORM
+===================================================== */
+
+function showForm() {
+
+    document.getElementById("userForm").style.display =
+        "block";
+
+}
+
+
+
+/* =====================================================
+   START GAME
+===================================================== */
+
+async function beginGame() {
+
+
+    playerName =
+        document.getElementById("playerName")
+        .value
+        .trim();
+
+
+    playerUSN =
+        document.getElementById("playerUSN")
+        .value
+        .trim();
+
+
+    /* =========================
+       CHECK NAME
+    ========================= */
+
+    if (playerName === "") {
+
+        alert(
+            "Please enter your name."
+        );
+
+        return;
+
+    }
+
+
+    /* =========================
+       CHECK USN
+    ========================= */
+
+    if (playerUSN === "") {
+
+        alert(
+            "Please enter your USN Number."
+        );
+
+        return;
+
+    }
+
+
+    /* =========================
+       CHECK PREVIOUS ATTEMPT
+    ========================= */
+
+    try {
+
+
+        const response =
+            await fetch("/api/students");
+
+
+        if (!response.ok) {
+
+            alert(
+                "Unable to check previous attempt. Please try again."
+            );
+
+            return;
+
+        }
+
+
+        const students =
+            await response.json();
+
+
+        /* =========================
+           FIND EXISTING USN
+        ========================= */
+
+        const alreadyAttempted =
+            students.some(function(student) {
+
+                return String(student.srn)
+                    .trim()
+                    .toLowerCase() ===
+                    String(playerUSN)
+                    .trim()
+                    .toLowerCase();
+
+            });
+
+
+        /* =========================
+           ALREADY ATTEMPTED
+        ========================= */
+
+        if (alreadyAttempted) {
+
+            alert(
+
+                "❌ ATTEMPT ALREADY TAKEN!\n\n" +
+
+                "This USN has already completed the quiz.\n" +
+
+                "You cannot attend the quiz again."
+
+            );
+
+            return;
+
+        }
+
+
+        /* =========================
+           START QUIZ
+        ========================= */
+
+        document.getElementById("home").style.display =
+            "none";
+
+
+        document.getElementById("game").style.display =
+            "block";
+
+
+        currentPuzzle = 0;
+
+        score = 0;
+
+
+        document.getElementById("score").innerText =
+            score;
+
+
+        loadPuzzle();
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "❌ Error checking USN:",
+            error
+        );
+
+
+        alert(
+
+            "Unable to check your attempt.\n" +
+
+            "Please make sure the server is running."
+
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD PUZZLE
+===================================================== */
+
+function loadPuzzle() {
+
+
+    clearInterval(timer);
+
+
+    finished = false;
+
+    time = 30;
+
+
+    const puzzle =
+        puzzles[currentPuzzle];
+
+
+    document.getElementById("puzzleCount").innerText =
+
+        "Puzzle " +
+
+        (currentPuzzle + 1) +
+
+        " / " +
+
+        puzzles.length;
+
+
+    document.getElementById("question").innerText =
+        puzzle.question;
+
+
+    document.getElementById("result").innerText = "";
+
+
+    document.getElementById("result").className =
+        "result";
+
+
+    document.getElementById("timeUp").style.display =
+        "none";
+
+
+    document.getElementById("checkBtn").style.display =
+        "inline-block";
+
+
+    document.getElementById("nextBtn").style.display =
+        "none";
+
+
+    document.getElementById("timer").innerText =
+        "00:30";
+
+
+    document.getElementById("timerBar").style.width =
+        "100%";
+
+
+    document.getElementById("timer").style.color =
+        "#245b32";
+
+
+    document.getElementById("progress").style.width =
+
+        (
+            (currentPuzzle + 1) /
+            puzzles.length *
+            100
+        ) +
+
+        "%";
+
+
+    createAnswerBoxes(puzzle);
+
+
+    startTimer();
+
+}
+
+
+
+/* =====================================================
+   CREATE ANSWER BOXES
+===================================================== */
+
+function createAnswerBoxes(puzzle) {
+
+
+    const area =
+        document.getElementById("answerArea");
+
+
+    area.innerHTML = "";
+
+
+    const answer =
+        puzzle.answer.toUpperCase();
+
+
+    const missing =
+        puzzle.missing;
+
+
+    for (
+        let i = 0;
+        i < answer.length;
+        i++
+    ) {
+
+
+        /* =========================
+           WORD SPACE
+        ========================= */
+
+        if (answer[i] === " ") {
+
+
+            const space =
+                document.createElement("div");
+
+
+            space.className =
+                "word-space";
+
+
+            area.appendChild(space);
+
+
+            continue;
+
+        }
+
+
+        /* =========================
+           LETTER BOX
+        ========================= */
+
+        const box =
+            document.createElement("div");
+
+
+        box.className =
+            "box";
+
+
+        /* =========================
+           MISSING LETTER
+        ========================= */
+
+        if (missing.includes(i)) {
+
+
+            box.classList.add(
+                "missing"
+            );
+
+
+            const input =
+                document.createElement("input");
+
+
+            input.type =
+                "text";
+
+
+            input.maxLength =
+                1;
+
+
+            input.autocomplete =
+                "off";
+
+
+            input.dataset.position =
+                i;
+
+
+            /* =========================
+               AUTOMATIC CORRECT / WRONG
+            ========================= */
+
+            input.addEventListener(
+                "input",
+                function() {
+
+
+                    let value =
+                        this.value
+                        .replace(
+                            /[^a-zA-Z]/g,
+                            ""
+                        )
+                        .toUpperCase();
+
+
+                    this.value =
+                        value;
+
+
+                    if (value === "") {
+
+
+                        box.classList.remove(
+                            "correct"
+                        );
+
+
+                        box.classList.remove(
+                            "wrong"
+                        );
+
+
+                        document.getElementById(
+                            "result"
+                        ).innerText = "";
+
+
+                        return;
+
+                    }
+
+
+                    const position =
+                        Number(
+                            this.dataset.position
+                        );
+
+
+                    const correctLetter =
+                        answer[position]
+                        .toUpperCase();
+
+
+                    if (
+                        value ===
+                        correctLetter
+                    ) {
+
+
+                        box.classList.remove(
+                            "wrong"
+                        );
+
+
+                        box.classList.add(
+                            "correct"
+                        );
+
+                    }
+
+                    else {
+
+
+                        box.classList.remove(
+                            "correct"
+                        );
+
+
+                        box.classList.add(
+                            "wrong"
+                        );
+
+                    }
+
+
+                    checkAutomaticAnswer();
+
+                }
+            );
+
+
+            /* =========================
+               MOVE TO NEXT INPUT
+            ========================= */
+
+            input.addEventListener(
+                "input",
+                function() {
+
+
+                    if (this.value !== "") {
+
+
+                        const inputs =
+                            document.querySelectorAll(
+                                ".missing input"
+                            );
+
+
+                        const index =
+                            Array.from(inputs)
+                            .indexOf(this);
+
+
+                        if (
+                            index <
+                            inputs.length - 1
+                        ) {
+
+
+                            inputs[
+                                index + 1
+                            ].focus();
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+            box.appendChild(input);
+
+        }
+
+
+        /* =========================
+           FIXED LETTER
+        ========================= */
+
+        else {
+
+
+            box.classList.add(
+                "fixed"
+            );
+
+
+            box.innerText =
+                answer[i];
+
+        }
+
+
+        area.appendChild(box);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   AUTOMATIC ANSWER CHECK
+===================================================== */
+
+function checkAutomaticAnswer() {
+
+
+    if (finished) {
+
+        return;
+
+    }
+
+
+    const puzzle =
+        puzzles[currentPuzzle];
+
+
+    const inputs =
+        document.querySelectorAll(
+            ".missing input"
+        );
+
+
+    let allFilled = true;
+
+    let allCorrect = true;
+
+
+    inputs.forEach(
+        function(input) {
+
+
+            const position =
+                Number(
+                    input.dataset.position
+                );
+
+
+            const expected =
+                puzzle.answer[position]
+                .toUpperCase();
+
+
+            const entered =
+                input.value
+                .toUpperCase();
+
+
+            if (entered === "") {
+
+
+                allFilled = false;
+
+                return;
+
+            }
+
+
+            if (
+                entered !== expected
+            ) {
+
+                allCorrect = false;
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       NOT COMPLETE
+    ========================= */
+
+    if (!allFilled) {
+
+
+        document.getElementById(
+            "result"
+        ).innerText = "";
+
+
+        return;
+
+    }
+
+
+    /* =========================
+       WRONG ANSWER
+    ========================= */
+
+    if (!allCorrect) {
+
+
+        document.getElementById(
+            "result"
+        ).innerText =
+            "❌ WRONG ANSWER";
+
+
+        document.getElementById(
+            "result"
+        ).style.color =
+            "#d00000";
+
+
+        return;
+
+    }
+
+
+    /* =========================
+       CORRECT ANSWER
+    ========================= */
+
+    finished = true;
+
+
+    clearInterval(timer);
+
+
+    score += 5;
+
+
+    document.getElementById(
+        "score"
+    ).innerText =
+        score;
+
+
+    inputs.forEach(
+        function(input) {
+
+            input.disabled =
+                true;
+
+        }
+    );
+
+
+    document.getElementById(
+        "result"
+    ).innerText =
+        "🎉 CORRECT! +5 MARKS";
+
+
+    document.getElementById(
+        "result"
+    ).style.color =
+        "#198754";
+
+
+    document.getElementById(
+        "checkBtn"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "nextBtn"
+    ).style.display =
+        "inline-block";
+
+}
+
+
+
+/* =====================================================
+   CHECK ANSWER BUTTON
+===================================================== */
+
+function checkAnswer() {
+
+    checkAutomaticAnswer();
+
+}
+
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function startTimer() {
+
+
+    clearInterval(timer);
+
+
+    time = 30;
+
+
+    timer =
+        setInterval(
+            function() {
+
+
+                time--;
+
+
+                document.getElementById(
+                    "timer"
+                ).innerText =
+
+                    "00:" +
+
+                    String(time)
+                    .padStart(2, "0");
+
+
+                document.getElementById(
+                    "timerBar"
+                ).style.width =
+
+                    (
+                        time / 30 * 100
+                    ) +
+
+                    "%";
+
+
+                /* =========================
+                   LAST 5 SECONDS
+                ========================= */
+
+                if (time <= 5) {
+
+
+                    document.getElementById(
+                        "timer"
+                    ).style.color =
+                        "#d00000";
+
+                }
+
+
+                /* =========================
+                   TIME UP
+                ========================= */
+
+                if (time <= 0) {
+
+
+                    clearInterval(timer);
+
+
+                    timeUp();
+
+                }
+
+            },
+            1000
+        );
+
+}
+
+
+
+/* =====================================================
+   TIME UP
+===================================================== */
+
+function timeUp() {
+
+
+    if (finished) {
+
+        return;
+
+    }
+
+
+    finished = true;
+
+
+    const puzzle =
+        puzzles[currentPuzzle];
+
+
+    document.getElementById(
+        "result"
+    ).innerText =
+        "⏰ TIME'S UP! SCORE: 0";
+
+
+    document.getElementById(
+        "result"
+    ).style.color =
+        "#d00000";
+
+
+    document.getElementById(
+        "correctAnswer"
+    ).innerText =
+        puzzle.answer;
+
+
+    document.getElementById(
+        "timeUp"
+    ).style.display =
+        "block";
+
+
+    const inputs =
+        document.querySelectorAll(
+            ".missing input"
+        );
+
+
+    inputs.forEach(
+        function(input) {
+
+
+            const position =
+                Number(
+                    input.dataset.position
+                );
+
+
+            input.value =
+                puzzle.answer[position];
+
+
+            input.disabled =
+                true;
+
+
+            input.parentElement.classList.add(
+                "timeup-answer"
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "checkBtn"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "nextBtn"
+    ).style.display =
+        "inline-block";
+
+}
+
+
+
+/* =====================================================
+   NEXT PUZZLE
+===================================================== */
+
+function nextPuzzle() {
+
+
+    currentPuzzle++;
+
+
+    /* =========================
+       ALL PUZZLES COMPLETED
+    ========================= */
+
+    if (
+        currentPuzzle >=
+        puzzles.length
+    ) {
+
+
+        finishGame();
+
+
+        return;
+
+    }
+
+
+    loadPuzzle();
+
+}
+
+
+
+/* =====================================================
+   FINISH GAME
+===================================================== */
+
+function finishGame() {
+
+
+    clearInterval(timer);
+
+
+    /* =========================
+       HIDE GAME
+    ========================= */
+
+    document.getElementById(
+        "game"
+    ).style.display =
+        "none";
+
+
+    /* =========================
+       SHOW CONGRATULATIONS
+    ========================= */
+
+    document.getElementById(
+        "end"
+    ).style.display =
+        "block";
+
+
+    /* =========================
+       SHOW FINAL SCORE
+    ========================= */
+
+    document.getElementById(
+        "finalScore"
+    ).innerText =
+        score;
+
+
+    /* =========================
+       SHOW PLAYER DETAILS
+    ========================= */
+
+    document.getElementById(
+        "playerInfo"
+    ).innerText =
+
+        playerName +
+
+        " • USN: " +
+
+        playerUSN;
+
+
+    /* =========================
+       SAVE STUDENT
+    ========================= */
+
+    console.log(
+        "Calling saveStudent"
+    );
+
+
+    saveStudent(
+        playerName,
+        playerUSN,
+        score
+    );
+
+}
+
+
+
+/* =====================================================
+   RESTART GAME
+===================================================== */
+
+function restartGame() {
+
+
+    clearInterval(timer);
+
+
+    currentPuzzle = 0;
+
+    score = 0;
+
+    time = 30;
+
+    finished = false;
+
+
+    document.getElementById(
+        "end"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "game"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "home"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "userForm"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "playerName"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "playerUSN"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "score"
+    ).innerText =
+        "0";
+
+
+    document.getElementById(
+        "timer"
+    ).innerText =
+        "00:30";
+
+
+    document.getElementById(
+        "timerBar"
+    ).style.width =
+        "100%";
+
+
+    document.getElementById(
+        "progress"
+    ).style.width =
+        "0%";
+
+}
+
+
+</script>
+
+
+<!-- =========================
+     APP.JS
+========================= -->
+
+<script src="app.js"></script>
+
+
+</body>
+
+</html>

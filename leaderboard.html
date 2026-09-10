@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BAMS Puzzle World - Leaderboard</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #eef7ef;
+
+            color: #174f30;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+
+            background: #155d35;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 32px;
+        }
+
+
+        header p {
+
+            margin: 8px 0 0;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           LEADERBOARD
+        ===================================================== */
+
+        .leaderboard-container {
+
+            max-width: 1000px;
+
+            margin: 40px auto;
+
+            padding: 20px;
+        }
+
+
+        .leaderboard-container h2 {
+
+            text-align: center;
+
+            font-size: 32px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .table-box {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.15);
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+
+            background: #155d35;
+
+            color: white;
+
+            padding: 14px;
+
+            text-align: center;
+        }
+
+
+        td {
+
+            padding: 13px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        tr:hover {
+
+            background: #f1f8f2;
+        }
+
+
+        .certificate-button {
+
+            background: #176238;
+
+            color: white;
+
+            border: none;
+
+            padding: 8px 14px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+
+        .certificate-button:hover {
+
+            background: #0e4527;
+        }
+
+
+        /* =====================================================
+           CERTIFICATE SECTION
+        ===================================================== */
+
+        #certificateSection {
+
+            display: none;
+
+            padding: 30px 15px 50px;
+        }
+
+
+        .certificate-title {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            color: #155d35;
+
+            font-size: 30px;
+        }
+
+
+        /* =====================================================
+           CERTIFICATE
+        ===================================================== */
+
+        .certificate {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 794px;
+
+            height: 1123px;
+
+            margin: auto;
+
+            padding: 45px 45px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f5fff3,
+                    #ffffff
+                );
+
+            border: 10px solid #155d35;
+
+            outline: 3px solid #d4af37;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.25);
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           INNER BORDER
+        ===================================================== */
+
+        .certificate::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 17px;
+
+            left: 17px;
+
+            right: 17px;
+
+            bottom: 17px;
+
+            border: 2px solid #c9a227;
+
+            pointer-events: none;
+
+            z-index: 1;
+        }
+
+
+        /* =====================================================
+           DECORATIVE LEAVES
+        ===================================================== */
+
+        .leaf {
+
+            position: absolute;
+
+            font-size: 45px;
+
+            opacity: 0.65;
+
+            z-index: 2;
+        }
+
+
+        .leaf-one {
+
+            top: 12px;
+
+            left: 18px;
+        }
+
+
+        .leaf-two {
+
+            top: 12px;
+
+            right: 18px;
+        }
+
+
+        .leaf-three {
+
+            bottom: 12px;
+
+            left: 18px;
+        }
+
+
+        .leaf-four {
+
+            bottom: 12px;
+
+            right: 18px;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .certificate-header {
+
+            position: relative;
+
+            z-index: 4;
+
+            text-align: center;
+
+            width: 100%;
+        }
+
+
+        .trust {
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            color: #185b36;
+
+            line-height: 1.2;
+        }
+
+
+        .college-name {
+
+            margin-top: 5px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #b85c25;
+
+            line-height: 1.3;
+        }
+
+
+        .college-sub {
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #b85c25;
+
+            margin-top: 4px;
+
+            line-height: 1.25;
+        }
+
+
+        .department {
+
+            margin-top: 12px;
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #155d35;
+
+            line-height: 1.2;
+        }
+
+
+        /* =====================================================
+           CERTIFICATE HEADING
+        ===================================================== */
+
+        .certificate-heading {
+
+            position: relative;
+
+            z-index: 4;
+
+            margin: 25px auto 30px;
+
+            width: 75%;
+
+            padding: 11px 10px;
+
+            text-align: center;
+
+            background: #155d35;
+
+            border: 4px solid #d4af37;
+
+            color: white;
+
+            font-family: Georgia, serif;
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .certificate-content {
+
+            position: relative;
+
+            z-index: 4;
+
+            width: 100%;
+
+            height: 550px;
+        }
+
+
+        /* =====================================================
+           STUDENT CENTER AREA
+        ===================================================== */
+
+        .student-area {
+
+            position: absolute;
+
+            top: 25px;
+
+            left: 150px;
+
+            right: 150px;
+
+            width: auto;
+
+            text-align: center;
+
+            padding: 0;
+        }
+
+
+        .certify {
+
+            font-family: Georgia, serif;
+
+            font-size: 19px;
+
+            font-style: italic;
+
+            color: #174f30;
+
+            line-height: 1.3;
+        }
+
+
+        .student-name {
+
+            display: block;
+
+            width: 100%;
+
+            max-width: 100%;
+
+            margin: 15px auto 0;
+
+            padding: 5px 10px 9px;
+
+            font-family: Georgia, serif;
+
+            font-size: 38px;
+
+            font-weight: bold;
+
+            font-style: italic;
+
+            color: #155d35;
+
+            border-bottom: 2px solid #c9a227;
+
+            line-height: 1.15;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .student-usn {
+
+            margin-top: 10px;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            color: #174f30;
+        }
+
+
+        .participation-text {
+
+            margin-top: 35px;
+
+            font-family: Georgia, serif;
+
+            font-size: 17px;
+
+            font-style: italic;
+
+            color: #174f30;
+
+            line-height: 1.3;
+        }
+
+
+        .event {
+
+            margin-top: 8px;
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            color: #155d35;
+        }
+
+
+        .event-sub {
+
+            margin-top: 5px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #155d35;
+        }
+
+
+        /* =====================================================
+           LEFT PHOTO
+        ===================================================== */
+
+        .photo-left {
+
+            position: absolute;
+
+            top: 25px;
+
+            left: 5px;
+
+            width: 125px;
+
+            text-align: center;
+
+            z-index: 6;
+        }
+
+
+        .guide-photo {
+
+            display: block;
+
+            width: 105px;
+
+            height: 130px;
+
+            margin: 0 auto;
+
+            object-fit: cover;
+
+            border: 4px solid white;
+
+            outline: 3px solid #176238;
+
+            box-shadow:
+                0 4px 10px rgba(0,0,0,0.20);
+        }
+
+
+        .photo-left .photo-label {
+
+            width: 115px;
+
+            margin: 8px auto 0;
+
+            padding: 5px 3px;
+
+            background: #176238;
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            line-height: 1.2;
+        }
+
+
+        .photo-left .photo-name {
+
+            margin-top: 5px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #155d35;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           RIGHT PHOTO
+        ===================================================== */
+
+        .photo-right {
+
+            position: absolute;
+
+            top: 25px;
+
+            right: 5px;
+
+            width: 125px;
+
+            text-align: center;
+
+            z-index: 6;
+        }
+
+
+        .tharun-photo {
+
+            display: block;
+
+            width: 105px;
+
+            height: 130px;
+
+            margin: 0 auto;
+
+            object-fit: cover;
+
+            border: 4px solid white;
+
+            outline: 3px solid #176238;
+
+            box-shadow:
+                0 4px 10px rgba(0,0,0,0.20);
+        }
+
+
+        .photo-right .photo-label {
+
+            width: 115px;
+
+            margin: 8px auto 0;
+
+            padding: 5px 3px;
+
+            background: #176238;
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            line-height: 1.2;
+        }
+
+
+        .photo-right .photo-name {
+
+            margin-top: 5px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #155d35;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           SCORE
+        ===================================================== */
+
+        .final-score {
+
+            margin-top: 30px;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            color: #155d35;
+        }
+
+
+        .score-number {
+
+            display: inline-block;
+
+            margin-left: 7px;
+
+            font-size: 25px;
+
+            color: #b8860b;
+        }
+
+
+        /* =====================================================
+           DATE
+        ===================================================== */
+
+        .certificate-date-box {
+
+            position: absolute;
+
+            left: 65px;
+
+            bottom: 75px;
+
+            z-index: 5;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            color: #174f30;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .certificate-footer {
+
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 0;
+
+            right: 0;
+
+            text-align: center;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            font-style: italic;
+
+            color: #155d35;
+
+            z-index: 5;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .buttons {
+
+            text-align: center;
+
+            margin-top: 25px;
+        }
+
+
+        .download-btn,
+        .back-btn {
+
+            padding: 13px 25px;
+
+            margin: 5px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .download-btn {
+
+            background: #176238;
+
+            color: white;
+        }
+
+
+        .back-btn {
+
+            background: #555;
+
+            color: white;
+        }
+
+
+        .download-btn:hover {
+
+            background: #0d4528;
+        }
+
+
+        .back-btn:hover {
+
+            background: #333;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width:800px) {
+
+            .certificate {
+
+                height: auto;
+
+                min-height: 1000px;
+
+                padding: 30px 20px;
+            }
+
+
+            .certificate-heading {
+
+                width: 95%;
+
+                font-size: 22px;
+            }
+
+
+            .department {
+
+                font-size: 20px;
+            }
+
+
+            .college-name {
+
+                font-size: 14px;
+            }
+
+
+            .college-sub {
+
+                font-size: 11px;
+            }
+
+
+            .certificate-content {
+
+                height: auto;
+
+                min-height: 700px;
+            }
+
+
+            .student-area {
+
+                position: relative;
+
+                top: auto;
+
+                left: auto;
+
+                right: auto;
+
+                width: 100%;
+
+                margin-top: 20px;
+            }
+
+
+            .student-name {
+
+                font-size: 30px;
+            }
+
+
+            .photo-left {
+
+                position: relative;
+
+                top: auto;
+
+                left: auto;
+
+                margin: 20px auto;
+            }
+
+
+            .photo-right {
+
+                position: relative;
+
+                top: auto;
+
+                right: auto;
+
+                margin: 20px auto;
+            }
+
+
+            .certificate-date-box {
+
+                position: relative;
+
+                left: auto;
+
+                bottom: auto;
+
+                margin-top: 30px;
+
+                text-align: center;
+            }
+
+
+            .certificate-footer {
+
+                position: relative;
+
+                bottom: auto;
+
+                margin-top: 25px;
+            }
+        }
+
+
+        /* =====================================================
+           PRINT - ONE A4 PORTRAIT PAGE
+        ===================================================== */
+
+        @page {
+
+            size: A4 portrait;
+
+            margin: 0;
+        }
+
+
+        @media print {
+
+            * {
+
+                box-sizing: border-box !important;
+            }
+
+
+            html,
+            body {
+
+                width: 210mm !important;
+
+                height: 297mm !important;
+
+                margin: 0 !important;
+
+                padding: 0 !important;
+
+                overflow: hidden !important;
+
+                background: white !important;
+            }
+
+
+            body * {
+
+                visibility: hidden;
+            }
+
+
+            #certificateSection,
+            #certificateSection * {
+
+                visibility: visible;
+            }
+
+
+            #certificateSection {
+
+                display: block !important;
+
+                position: absolute !important;
+
+                top: 0 !important;
+
+                left: 0 !important;
+
+                width: 210mm !important;
+
+                height: 297mm !important;
+
+                margin: 0 !important;
+
+                padding: 0 !important;
+
+                overflow: hidden !important;
+            }
+
+
+            .certificate-title,
+            .buttons {
+
+                display: none !important;
+            }
+
+
+            /* =================================================
+               PRINT CERTIFICATE
+            ================================================= */
+
+            .certificate {
+
+                position: relative !important;
+
+                width: 210mm !important;
+
+                height: 297mm !important;
+
+                max-width: none !important;
+
+                min-height: 0 !important;
+
+                margin: 0 !important;
+
+                padding: 11mm 9mm !important;
+
+                border: 3mm solid #155d35 !important;
+
+                outline: 1mm solid #d4af37 !important;
+
+                box-shadow: none !important;
+
+                overflow: hidden !important;
+
+                page-break-before: avoid !important;
+
+                page-break-after: avoid !important;
+
+                page-break-inside: avoid !important;
+
+                break-before: avoid !important;
+
+                break-after: avoid !important;
+
+                break-inside: avoid !important;
+
+                -webkit-print-color-adjust: exact !important;
+
+                print-color-adjust: exact !important;
+            }
+
+
+            /* =================================================
+               PRINT HEADER
+            ================================================= */
+
+            .trust {
+
+                font-size: 10px !important;
+            }
+
+
+            .college-name {
+
+                font-size: 13px !important;
+
+                line-height: 1.2 !important;
+
+                margin-top: 2px !important;
+            }
+
+
+            .college-sub {
+
+                font-size: 9px !important;
+
+                line-height: 1.2 !important;
+
+                margin-top: 2px !important;
+            }
+
+
+            .department {
+
+                font-size: 19px !important;
+
+                margin-top: 4px !important;
+            }
+
+
+            /* =================================================
+               PRINT TITLE
+            ================================================= */
+
+            .certificate-heading {
+
+                width: 76% !important;
+
+                margin: 6mm auto 6mm !important;
+
+                padding: 4px 7px !important;
+
+                font-size: 19px !important;
+
+                border: 2px solid #d4af37 !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            /* =================================================
+               PRINT CONTENT
+            ================================================= */
+
+            .certificate-content {
+
+                position: relative !important;
+
+                width: 100% !important;
+
+                height: 175mm !important;
+
+                min-height: 0 !important;
+            }
+
+
+            /* =================================================
+               LEFT PHOTO PRINT
+            ================================================= */
+
+            .photo-left {
+
+                position: absolute !important;
+
+                top: 8mm !important;
+
+                left: 3mm !important;
+
+                width: 35mm !important;
+
+                margin: 0 !important;
+
+                text-align: center !important;
+
+                z-index: 6 !important;
+            }
+
+
+            .guide-photo {
+
+                width: 28mm !important;
+
+                height: 35mm !important;
+
+                margin: 0 auto !important;
+
+                object-fit: cover !important;
+
+                border: 2px solid white !important;
+
+                outline: 2px solid #176238 !important;
+
+                box-shadow: none !important;
+            }
+
+
+            .photo-left .photo-label {
+
+                width: 32mm !important;
+
+                margin: 3px auto 0 !important;
+
+                padding: 3px 2px !important;
+
+                font-size: 8px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            .photo-left .photo-name {
+
+                margin-top: 2px !important;
+
+                font-size: 10px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            /* =================================================
+               RIGHT PHOTO PRINT
+            ================================================= */
+
+            .photo-right {
+
+                position: absolute !important;
+
+                top: 8mm !important;
+
+                right: 3mm !important;
+
+                width: 35mm !important;
+
+                margin: 0 !important;
+
+                text-align: center !important;
+
+                z-index: 6 !important;
+            }
+
+
+            .tharun-photo {
+
+                width: 28mm !important;
+
+                height: 35mm !important;
+
+                margin: 0 auto !important;
+
+                object-fit: cover !important;
+
+                border: 2px solid white !important;
+
+                outline: 2px solid #176238 !important;
+
+                box-shadow: none !important;
+            }
+
+
+            .photo-right .photo-label {
+
+                width: 32mm !important;
+
+                margin: 3px auto 0 !important;
+
+                padding: 3px 2px !important;
+
+                font-size: 8px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            .photo-right .photo-name {
+
+                margin-top: 2px !important;
+
+                font-size: 10px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            /* =================================================
+               STUDENT AREA PRINT
+            ================================================= */
+
+            .student-area {
+
+                position: absolute !important;
+
+                top: 8mm !important;
+
+                left: 40mm !important;
+
+                right: 40mm !important;
+
+                width: auto !important;
+
+                padding: 0 !important;
+
+                margin: 0 !important;
+
+                text-align: center !important;
+            }
+
+
+            .certify {
+
+                font-size: 12px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            .student-name {
+
+                width: 100% !important;
+
+                max-width: 100% !important;
+
+                margin: 5px auto 0 !important;
+
+                padding: 2px 4px 4px !important;
+
+                font-size: 24px !important;
+
+                line-height: 1.1 !important;
+
+                white-space: nowrap !important;
+
+                overflow: hidden !important;
+
+                text-overflow: ellipsis !important;
+            }
+
+
+            .student-usn {
+
+                margin-top: 5px !important;
+
+                font-size: 13px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            .participation-text {
+
+                margin-top: 11mm !important;
+
+                font-size: 12px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            .event {
+
+                margin-top: 3px !important;
+
+                font-size: 17px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            .event-sub {
+
+                margin-top: 2px !important;
+
+                font-size: 14px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            /* =================================================
+               SCORE PRINT
+            ================================================= */
+
+            .final-score {
+
+                margin-top: 7mm !important;
+
+                font-size: 14px !important;
+
+                line-height: 1.2 !important;
+            }
+
+
+            .score-number {
+
+                margin-left: 4px !important;
+
+                font-size: 18px !important;
+            }
+
+
+            /* =================================================
+               DATE PRINT
+            ================================================= */
+
+            .certificate-date-box {
+
+                position: absolute !important;
+
+                left: 12mm !important;
+
+                bottom: 16mm !important;
+
+                margin: 0 !important;
+
+                font-size: 10px !important;
+
+                line-height: 1.2 !important;
+
+                z-index: 5 !important;
+            }
+
+
+            /* =================================================
+               FOOTER PRINT
+            ================================================= */
+
+            .certificate-footer {
+
+                position: absolute !important;
+
+                left: 0 !important;
+
+                right: 0 !important;
+
+                bottom: 5mm !important;
+
+                margin: 0 !important;
+
+                font-size: 10px !important;
+
+                line-height: 1.2 !important;
+
+                z-index: 5 !important;
+            }
+
+
+            /* =================================================
+               INNER BORDER PRINT
+            ================================================= */
+
+            .certificate::before {
+
+                top: 5mm !important;
+
+                left: 5mm !important;
+
+                right: 5mm !important;
+
+                bottom: 5mm !important;
+
+                border: 1px solid #c9a227 !important;
+            }
+
+
+            .leaf {
+
+                font-size: 30px !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <h1>
+        🌿 BAMS PUZZLE WORLD
+    </h1>
+
+    <p>
+        Ayurveda • Knowledge • Learning • Challenge
+    </p>
+
+</header>
+
+
+<!-- =====================================================
+     LEADERBOARD
+===================================================== -->
+
+<div
+    class="leaderboard-container"
+    id="leaderboardSection">
+
+    <h2>
+        🏆 LEADERBOARD
+    </h2>
+
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Rank</th>
+
+                    <th>Name</th>
+
+                    <th>USN</th>
+
+                    <th>Score</th>
+
+                    <th>Date</th>
+
+                    <th>Certificate</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="leaderboardBody">
+
+                <tr>
+
+                    <td colspan="6">
+
+                        Loading...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CERTIFICATE
+===================================================== -->
+
+<section id="certificateSection">
+
+
+    <h2 class="certificate-title">
+
+        🏆 Your Certificate
+
+    </h2>
+
+
+    <div class="certificate">
+
+
+        <!-- DECORATIVE CORNERS -->
+
+        <div class="leaf leaf-one">
+            🌿
+        </div>
+
+        <div class="leaf leaf-two">
+            🌿
+        </div>
+
+        <div class="leaf leaf-three">
+            🌿
+        </div>
+
+        <div class="leaf leaf-four">
+            🌿
+        </div>
+
+
+        <!-- =================================================
+             HEADER
+        ================================================= -->
+
+        <div class="certificate-header">
+
+
+            <div class="trust">
+
+                S.G.V.V. Trust's
+
+            </div>
+
+
+            <div class="college-name">
+
+                SHRI JAGADGURU GAVISIDDHESHWARA
+                AYURVEDIC MEDICAL COLLEGE,
+
+            </div>
+
+
+            <div class="college-sub">
+
+                POST GRADUATE STUDIES & RESEARCH CENTER,
+                KOPPAL-583231
+
+            </div>
+
+
+            <div class="department">
+
+                🌿 Department of Dravya Guna 🌿
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TITLE
+        ================================================= -->
+
+        <div class="certificate-heading">
+
+            CERTIFICATE OF PARTICIPATION
+
+        </div>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================= -->
+
+        <div class="certificate-content">
+
+
+            <!-- LEFT PHOTO -->
+
+            <div class="photo-left">
+
+                <img
+                    src="photo.jpg"
+                    alt="Dr. Ashwini"
+                    class="guide-photo">
+
+                <div class="photo-label">
+
+                    Guided by
+
+                </div>
+
+                <div class="photo-name">
+
+                    Dr. Ashwini
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STUDENT INFORMATION
+            ================================================= -->
+
+            <div class="student-area">
+
+
+                <div class="certify">
+
+                    This is to certify that
+
+                </div>
+
+
+                <div
+                    class="student-name"
+                    id="certificateName">
+
+                    Student Name
+
+                </div>
+
+
+                <div class="student-usn">
+
+                    USN:
+
+                    <span id="certificateUSN">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+                <div class="participation-text">
+
+                    has successfully participated in
+
+                </div>
+
+
+                <div class="event">
+
+                    BAMS PUZZLE WORLD
+
+                </div>
+
+
+                <div class="event-sub">
+
+                    PRABHAVA PUZZLE CHALLENGE
+
+                </div>
+
+
+                <div class="final-score">
+
+                    Final Score:
+
+                    <span
+                        class="score-number"
+                        id="certificateScore">
+
+                        0 / 100
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT PHOTO
+            ================================================= -->
+
+            <div class="photo-right">
+
+                <img
+                    src="tharun.jpg"
+                    alt="Tharun"
+                    class="tharun-photo">
+
+                <div class="photo-label">
+
+                    Presented by
+
+                </div>
+
+                <div class="photo-name">
+
+                    Tharun Kumar SK
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             DATE
+        ================================================= -->
+
+        <div class="certificate-date-box">
+
+            Date:
+
+            <span id="certificateDate">
+
+                -
+
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
+
+        <div class="certificate-footer">
+
+            🌿 BAMS Puzzle World 🌿
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         BUTTONS
+    ================================================= -->
+
+    <div class="buttons">
+
+
+        <button
+            class="download-btn"
+            onclick="downloadCertificate()">
+
+            📥 DOWNLOAD CERTIFICATE
+
+        </button>
+
+
+        <button
+            class="back-btn"
+            onclick="showLeaderboard()">
+
+            ← BACK TO LEADERBOARD
+
+        </button>
+
+
+    </div>
+
+</section>
+
+
+<script>
+
+
+/* =====================================================
+   LOAD LEADERBOARD
+===================================================== */
+
+async function loadLeaderboard() {
+
+    const body =
+        document.getElementById("leaderboardBody");
+
+
+    try {
+
+        const response =
+            await fetch("/api/students");
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load leaderboard"
+            );
+
+        }
+
+
+        const students =
+            await response.json();
+
+
+        /*
+           SORT BY HIGHEST MARKS
+
+           Example:
+
+           95 → Rank 1
+           90 → Rank 2
+           85 → Rank 3
+           70 → Rank 4
+        */
+
+        students.sort(function(a, b) {
+
+            const scoreA =
+                Number(a.score) || 0;
+
+            const scoreB =
+                Number(b.score) || 0;
+
+            return scoreB - scoreA;
+
+        });
+
+
+        body.innerHTML = "";
+
+
+        if (students.length === 0) {
+
+            body.innerHTML = `
+
+                <tr>
+
+                    <td colspan="6">
+
+                        No students have completed
+                        the quiz yet.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+        }
+
+
+        students.forEach(function(student, index) {
+
+
+            const row =
+                document.createElement("tr");
+
+
+            /*
+               RANK BASED ON SORTED SCORE
+            */
+
+            const rank =
+                index + 1;
+
+
+            /*
+               GET DATE FROM DATABASE
+
+               attended_at is created when
+               student completes quiz.
+            */
+
+            let date = "-";
+
+
+            if (student.attended_at) {
+
+                const dateObject =
+                    new Date(student.attended_at);
+
+
+                if (!isNaN(dateObject.getTime())) {
+
+                    date =
+                        dateObject.toLocaleDateString(
+                            "en-IN",
+                            {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric"
+                            }
+                        );
+                }
+            }
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    ${rank}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        student.student_name
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        student.srn
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ⭐ ${Number(student.score) || 0} / 100
+
+                </td>
+
+
+                <td>
+
+                    ${date}
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        class="certificate-button"
+                        onclick='showCertificate(
+                            ${JSON.stringify(student.student_name)},
+                            ${JSON.stringify(student.srn)},
+                            ${Number(student.score) || 0},
+                            ${JSON.stringify(student.attended_at || "")}
+                        )'>
+
+                        🏆 Certificate
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            body.appendChild(row);
+
+        });
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Leaderboard error:",
+            error
+        );
+
+
+        body.innerHTML = `
+
+            <tr>
+
+                <td colspan="6">
+
+                    ❌ Unable to load leaderboard.
+
+                    <br><br>
+
+                    Make sure the server is running.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOW CERTIFICATE
+===================================================== */
+
+function showCertificate(
+    name,
+    usn,
+    score,
+    attendedAt
+) {
+
+
+    /*
+       NAME
+    */
+
+    document.getElementById(
+        "certificateName"
+    ).innerText = name;
+
+
+    /*
+       USN
+    */
+
+    document.getElementById(
+        "certificateUSN"
+    ).innerText = usn;
+
+
+    /*
+       SCORE
+    */
+
+    document.getElementById(
+        "certificateScore"
+    ).innerText =
+        Number(score || 0) + " / 100";
+
+
+    /*
+       IMPORTANT:
+
+       Show the actual date when the
+       student attended/completed the quiz.
+
+       NOT today's date.
+    */
+
+    let certificateDate = "-";
+
+
+    if (attendedAt) {
+
+        const dateObject =
+            new Date(attendedAt);
+
+
+        if (!isNaN(dateObject.getTime())) {
+
+            certificateDate =
+                dateObject.toLocaleDateString(
+                    "en-IN",
+                    {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric"
+                    }
+                );
+        }
+    }
+
+
+    document.getElementById(
+        "certificateDate"
+    ).innerText =
+        certificateDate;
+
+
+    /*
+       HIDE LEADERBOARD
+    */
+
+    document.getElementById(
+        "leaderboardSection"
+    ).style.display = "none";
+
+
+    /*
+       SHOW CERTIFICATE
+    */
+
+    document.getElementById(
+        "certificateSection"
+    ).style.display = "block";
+
+
+    /*
+       GO TO TOP
+    */
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =====================================================
+   BACK TO LEADERBOARD
+===================================================== */
+
+function showLeaderboard() {
+
+
+    document.getElementById(
+        "certificateSection"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "leaderboardSection"
+    ).style.display = "block";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =====================================================
+   DOWNLOAD CERTIFICATE
+===================================================== */
+
+function downloadCertificate() {
+
+    window.print();
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadLeaderboard();
+
+</script>
+
+
+</body>
+
+</html>
